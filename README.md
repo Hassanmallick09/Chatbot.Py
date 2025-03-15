@@ -25,8 +25,8 @@ This repository contains a simple automated chatbot built using the [Hyperbolic 
    ```
 2. **Clone the Repository**
    ```bash
-   git clone https://github.com/Hassanmallick09/chatbot.py.git
-   cd chatbot-app
+   git clone https://github.com/Hassanmallick09/Chatbot.Py.git
+   cd Chatbot.Py
    ```
 3. **Install Dependencies**
    ```bash
