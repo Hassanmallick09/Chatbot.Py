@@ -36,15 +36,15 @@ This repository contains a simple automated chatbot built using the [Hyperbolic 
    ```
 4. **Configure the API Key**
 
-Replace the `YOUR_API_KEY_HERE` in `chatbot.py` with your own [Hyperbolic API Key](https://app.hyperbolic.xyz/settings):
+Replace the `YOUR_API_KEY_HERE` in `Chatbot.Py` with your own [Hyperbolic API Key](https://app.hyperbolic.xyz/settings):
    ```bash
-nano chatbot.py
+nano Chatbot.Py
    ```
 5. **Run the Chatbot**
 
 Execute the script to start the chatbot:
    ```bash
-   python3 chatbot.py
+   python3 Chatbot.Py
    ```
 * You can enter `screen -S chat` before running it to run the script on a minimizable screen in background.
 * To minimize screen: `CTRL+A+D`
@@ -67,6 +67,6 @@ Waiting 87.3 seconds before next question...
 ## Notes
 * The API key in the code is a placeholder. You’ll need to sign up at [Hyperbolic Labs](https://app.hyperbolic.xyz/) to get your own.
 * Be mindful of API usage limits and costs depending on your Hyperbolic Labs plan.
-* Feel free to modify the `questions` list in `chatbot.py` to suit your interests!
+* Feel free to modify the `questions` list in `Chatbot.Py` to suit your interests!
 
 
