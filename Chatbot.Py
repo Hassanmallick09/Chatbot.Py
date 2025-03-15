@@ -2,166 +2,166 @@ import requests
 import time
 import random
 
-# API Configuration
-URL = "https://api.hyperbolic.xyz/v1/chat/completions"
-HEADERS = {
+# Your API URL and Headers
+url = "https://api.hyperbolic.xyz/v1/image/generation"
+headers = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer YOUR_API_KEY_HERE"  # Replace with your actual API key
+    "Authorization": "Bearer YOUR_API_KEY_HERE"
 }
 
-# List of 100 unique questions
-questions = [
-    "What's the best way to learn programming?",
-    "How does quantum computing work?",
-    "What are some healthy breakfast ideas?",
-    "Can you explain blockchain technology?",
-    "What's the weather like on Mars?",
-    "How do I improve my photography skills?",
-    "What are the benefits of meditation?",
-    "How does artificial intelligence work?",
-    "What's the history of the internet?",
-    "Can you suggest some good books to read?",
-    "What’s the meaning of life?",
-    "How do I make a perfect cup of coffee?",
-    "What are the latest space discoveries?",
-    "How can I stay motivated to exercise?",
-    "What’s the future of electric cars?",
-    "How do I start a small business?",
-    "What are some fun weekend activities?",
-    "Can you explain the theory of relativity?",
-    "What’s the best way to learn a language?",
-    "How does the stock market work?",
-    "What’s the best way to save money?",
-    "How do I plan a trip abroad?",
-    "What are the effects of climate change?",
-    "How does Wi-Fi actually work?",
-    "What’s the history of video games?",
-    "How can I improve my public speaking?",
-    "What’s the science behind rainbows?",
-    "How do I grow indoor plants successfully?",
-    "What are the benefits of drinking water?",
-    "How does cryptocurrency mining work?",
-    "What’s the history of chocolate?",
-    "How can I reduce stress in my life?",
-    "What are some tips for better sleep?",
-    "How do solar panels generate electricity?",
-    "What’s the best way to cook steak?",
-    "How does the human brain process memory?",
-    "What are some must-visit places in Europe?",
-    "How do I start investing in stocks?",
-    "What’s the difference between viruses and bacteria?",
-    "How can I make my home more eco-friendly?",
-    "What’s the history of the Olympic Games?",
-    "How do I train a dog effectively?",
-    "What are the benefits of yoga?",
-    "How does 3D printing work?",
-    "What’s the best way to learn guitar?",
-    "How do airplanes stay in the air?",
-    "What are some creative writing tips?",
-    "How does the immune system fight diseases?",
-    "What’s the future of space travel?",
-    "How can I improve my time management?",
-    "What’s the history of pizza?",
-    "How do I create a budget?",
-    "What are the benefits of recycling?",
-    "How does virtual reality work?",
-    "What’s the best way to study for exams?",
-    "How do I make homemade bread?",
-    "What are the causes of global warming?",
-    "How does GPS technology work?",
-    "What’s the history of photography?",
-    "How can I boost my creativity?",
-    "What are some tips for healthy eating?",
-    "How do self-driving cars function?",
-    "What’s the best way to learn cooking?",
-    "How does the moon affect tides?",
-    "What are some fun science experiments?",
-    "How do I start a podcast?",
-    "What’s the history of democracy?",
-    "How can I improve my drawing skills?",
-    "What are the benefits of journaling?",
-    "How does nuclear energy work?",
-    "What’s the best way to plan a party?",
-    "How do I maintain a car properly?",
-    "What are some tips for traveling cheap?",
-    "How does the internet of things work?",
-    "What’s the history of coffee?",
-    "How can I learn to code faster?",
-    "What are the benefits of team sports?",
-    "How do black holes form?",
-    "What’s the best way to declutter my home?",
-    "How does machine learning differ from AI?",
-    "What are some tips for gardening?",
-    "How do I make a good first impression?",
-    "What’s the history of the English language?",
-    "How can I stay productive working from home?",
-    "What are the benefits of learning history?",
-    "How does the human eye see color?",
-    "What’s the best way to train for a marathon?",
-    "How do I start a blog?",
-    "What are some unusual animal facts?",
-    "How does sound travel through the air?",
-    "What’s the history of fashion?",
-    "How can I improve my negotiation skills?",
-    "What are the benefits of mindfulness?",
-    "How do I build a simple website?",
-    "What’s the best way to learn math?",
-    "How does evolution work?",
-    "What are some tips for reducing waste?",
-    "How do I choose a good wine?",
-    "What’s the future of renewable energy?"
+# List of 100 prompts
+prompts = [
+    "Futuristic cityscape", 
+    "A tranquil mountain view", 
+    "A spaceship landing on Mars", 
+    "A forest in autumn", 
+    "Underwater scene with colorful fish", 
+    "A fantasy castle", 
+    "A cyberpunk city", 
+    "A medieval knight", 
+    "A tropical beach at sunset", 
+    "A futuristic robot",
+    "A bustling marketplace in an ancient city", 
+    "A serene Japanese garden", 
+    "An abandoned theme park", 
+    "A majestic waterfall in the jungle", 
+    "A dark wizard casting spells", 
+    "A vibrant coral reef", 
+    "A space station orbiting Earth", 
+    "A dragon flying over a mountain range", 
+    "A giant mechanical spider", 
+    "A glowing city under the stars", 
+    "A castle on the edge of a cliff", 
+    "A deserted island with a lone palm tree", 
+    "A cybernetic-enhanced human", 
+    "An ancient temple hidden in the jungle", 
+    "A steampunk airship", 
+    "A neon-lit alleyway in a future metropolis", 
+    "A medieval battle between knights", 
+    "A wizard's library filled with ancient books", 
+    "A haunted mansion on a foggy night", 
+    "A giant robot fighting monsters", 
+    "A lush rainforest filled with exotic animals", 
+    "A futuristic city with flying cars", 
+    "A pirate ship sailing through a storm", 
+    "A vintage car on an open highway", 
+    "A futuristic train traveling through a desert", 
+    "A person walking through a snow-covered forest", 
+    "A close-up of a rare exotic bird", 
+    "A samurai warrior in full armor", 
+    "A cat with cybernetic enhancements", 
+    "A bustling futuristic port", 
+    "A glowing portal in a dark cave", 
+    "A tranquil beach at dawn", 
+    "A moonlit night over a quiet village", 
+    "A fiery explosion in space", 
+    "A city submerged underwater", 
+    "A giant, ancient oak tree", 
+    "A post-apocalyptic wasteland", 
+    "A futuristic skyscraper with solar panels", 
+    "A colorful sunset over the ocean", 
+    "A surreal dreamscape", 
+    "A glowing moon over a futuristic city", 
+    "A superhero flying over a city", 
+    "A lone wolf in the snow", 
+    "A spaceship traveling through a wormhole", 
+    "A peaceful countryside with rolling hills", 
+    "A giant mushroom forest", 
+    "A retro 80s arcade", 
+    "A glowing flower in a dark forest", 
+    "A mystical creature in the mist", 
+    "A bustling cyberpunk street", 
+    "A robot tending to a garden", 
+    "A fiery phoenix rising from the ashes", 
+    "A waterfall with rainbow mist", 
+    "A knight in shining armor on horseback", 
+    "A spaceship docked on an alien planet", 
+    "A hidden treasure chest in an underwater cave", 
+    "A futuristic sports stadium", 
+    "A grand piano in an elegant ballroom", 
+    "A space explorer walking on an asteroid", 
+    "A foggy forest path", 
+    "A sleek, modern apartment overlooking a city", 
+    "A group of astronauts on the Moon", 
+    "A glowing jellyfish in deep ocean waters", 
+    "A giant space telescope", 
+    "A person meditating on top of a mountain", 
+    "A gothic cathedral at night", 
+    "A futuristic city with green technology", 
+    "A time traveler in a Victorian city", 
+    "A giant sand dune under a blue sky", 
+    "A train station in the future", 
+    "A mountain climber reaching the summit", 
+    "A ninja performing a stealth move", 
+    "A deserted spaceship in a barren landscape", 
+    "A knight battling a dragon", 
+    "A giant glowing crystal in a cave", 
+    "A spaceship flying through an asteroid belt", 
+    "A glowing city at night", 
+    "A futuristic park with robots and greenery", 
+    "A dragon made of fire", 
+    "A mystical unicorn in a forest", 
+    "A glowing moon over a quiet lake", 
+    "A futuristic car speeding on a highway", 
+    "A fantasy world with flying islands", 
+    "A secret garden with glowing plants", 
+    "A golden gate leading to a magical world", 
+    "A giant whale swimming in space", 
+    "A medieval castle surrounded by fog", 
+    "A futuristic city with towering skyscrapers", 
+    "A time machine in a laboratory", 
+    "A robot playing chess with a human", 
+    "A giant octopus in a deep-sea trench", 
+    "A futuristic hovercraft", 
+    "A huge library with ancient books", 
+    "A person walking through a neon-lit city", 
+    "A city built on floating islands", 
+    "A glowing mountain under a starry sky", 
+    "A medieval village at sunset", 
+    "A creature from another dimension", 
+    "A large asteroid passing by Earth", 
+    "A spacecraft entering a distant galaxy", 
+    "A surreal landscape with floating shapes", 
+    "A lighthouse on a rocky shore", 
+    "A glowing dragonfly hovering over a pond", 
+    "A futuristic soldier in battle armor", 
+    "A peaceful valley with a river", 
+    "A robotic bird flying over the ocean"
 ]
 
-# Function to send API request
-def send_chat_request(question):
+# Loop through each prompt and make an API request
+for i, prompt in enumerate(prompts, start=1):
     data = {
-        "messages": [
-            {
-                "role": "user",
-                "content": question
-            }
-        ],
-        "model": "meta-llama/Meta-Llama-3.1-8B-Instruct",  # Replace with the correct model
-        "max_tokens": 2048,
-        "temperature": 0.7,
-        "top_p": 0.9
+        "model_name": "SD1.5",
+        "prompt": prompt,  # Use the specific prompt for each iteration
+        "steps": 30,
+        "cfg_scale": 5,
+        "enable_refiner": False,
+        "height": 1024,
+        "width": 1024,
+        "backend": "auto"
     }
-    
-    try:
-        response = requests.post(URL, headers=HEADERS, json=data)
-        response.raise_for_status()  # Raise an exception for HTTP errors
-        result = response.json()
-        answer = result['choices'][0]['message']['content']
-        return answer
-    except Exception as e:
-        return f"Error: {str(e)}"
 
-# Main bot loop
-def run_chat_bot():
-    print("Starting automated chat bot...")
-    available_questions = questions.copy()  # Work with a copy to preserve original list
+    # Make the request to generate an image
+    response = requests.post(url, headers=headers, json=data)
     
-    for i in range(100):  # Fixed to 100 since we have exactly 100 questions
-        if not available_questions:
-            print("Ran out of questions unexpectedly!")
-            break
-        
-        # Pick and remove a random question to avoid repetition
-        question = random.choice(available_questions)
-        available_questions.remove(question)
-        
-        # Send request and print results
-        print(f"\nQuestion {i + 1}: {question}")
-        answer = send_chat_request(question)
-        print(f"Answer: {answer}")
-        
-        # Random delay between 1-2 minutes (60-120 seconds)
-        delay = random.uniform(60, 120)
-        print(f"Waiting {delay:.1f} seconds before next question...\n")
-        time.sleep(delay)
-    
-    print("\nCompleted 100 questions!")
+    if response.status_code == 200:
+        response_data = response.json()
+        # Print the full response for debugging
+        print(response_data)
 
-# Run the bot
-if __name__ == "__main__":
-    run_chat_bot()
+        # Extract the image URL (ensure the key is correct)
+        image_url = response_data.get('image_url')  # Adjust key if needed
+        if image_url:
+            print(f"Image {i} URL: {image_url}")
+        else:
+            print(f"Error: Image URL not found in response for Image {i}.")
+    else:
+        print(f"Error: Failed to generate image {i}. Status Code: {response.status_code}")
+
+    # Pause for a random interval between 60 and 120 seconds
+    sleep_time = random.randint(60, 120)
+    print(f"Pausing for {sleep_time} seconds...\n")
+    time.sleep(sleep_time)
+
+print("Completed generating all 100 images.")
